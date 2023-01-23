@@ -1,0 +1,9 @@
+@use "../abstracts/mixins" as mix;
+@use "../abstracts/variables" as var;
+@use "sass:math";
+
+.wrapper {
+    width: 100%;
+    @extend %d-flex;
+    flex-direction: column;
+}

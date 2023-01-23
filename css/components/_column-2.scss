@@ -1,0 +1,81 @@
+@use "../abstracts/mixins" as mix;
+@use "../abstracts/variables" as var;
+@use "sass:math";
+
+.column-2 {
+  margin-left: 20%;
+  @extend %d-flex;
+  flex: 0 1 100%;
+  flex-wrap: wrap;
+
+  @include mix.tablet-styles {
+    @media (max-width: 768px) {
+      margin-left: 0;
+    }
+  }
+
+  .box {
+    flex: 1 1 33.33%;
+
+    @include mix.tablet-styles {
+      @media (max-width: 768px) {
+        flex: 0 1 50%;
+      }
+    }
+
+    .box-inner {
+      @extend %d-flex;
+      background-color: var.$background-color-base;
+
+      .hover {
+        position: relative;
+        color: var.$text-color-secondary;
+
+        &:hover .txt {
+          opacity: 1;
+          cursor: pointer;
+        }
+        .img-box {
+          display: block;
+          width: 100%;
+          height: auto;
+        }
+        .txt {
+          @extend %wrap;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          width: 100%;
+          opacity: 0;
+          transition: 0.3s ease-out;
+          background-color: var.$background-color-base;
+        }
+        a {
+          width: 70%;
+          position: absolute;
+          color: var.$text-color-base;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 1.5rem;
+          text-transform: lowercase;
+          text-align: center;
+          text-decoration: none;
+          border-top: math.div(var.$gutter-base, 30) solid var.$text-color-base;
+          border-bottom: math.div(var.$gutter-base, 30) solid
+            var.$text-color-base;
+        }
+      }
+    }
+  }
+}
+
+@include mix.mobile-l-styles {
+  @media (max-width: 426px) {
+    .column-2 {
+      flex-direction: column;
+    }
+  }
+}

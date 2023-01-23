@@ -1,0 +1,115 @@
+@use "../abstracts/mixins" as mix;
+@use "../abstracts/variables" as var;
+@use "sass:math";
+
+.column-1 {
+  flex: 1 1 auto;
+  @extend %d-flex;
+  background-color: var.$background-color-base;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+
+  @include mix.tablet-styles {
+    flex: 0 0 100%;
+    position: static;
+    margin-left: 0;
+  }
+  .menu {
+    @extend %d-flex, %wrap, %section;
+    flex-direction: column;
+    justify-content: left;
+    flex: 1 1 auto;
+    padding-left: var.$gutter-base;
+
+    @include mix.laptop-m-styles {
+      @media (max-width: 1024px) {
+        padding-left: 0;
+      }
+    }
+
+    @include mix.tablet-styles {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      padding-bottom: (var.$gutter-base * 2);
+      flex: 0 1 auto;
+      text-transform: capitalize;
+      color: var.$text-color-base;
+
+      @include mix.tablet-styles {
+        padding-bottom: 0;
+      }
+    }
+    .menu-links {
+      flex: 1 0 auto;
+      list-style-type: none;
+      padding-left: 0;
+      margin-bottom: 0;
+
+      li {
+        a {
+          color: var.$text-color-base;
+          text-transform: capitalize;
+          text-decoration: none;
+          font-weight: var.$font-weight-normal;
+          font-size: 1.5rem;
+        }
+        &:hover {
+          text-decoration: underline;
+        }
+        &:not(:last-child) {
+          padding-bottom: math.div(var.$gutter-base, 2);
+        }
+      }
+
+      @include mix.tablet-styles {
+        display: none;
+      }
+    }
+    i.fa-bars {
+      display: none;
+
+      @include mix.tablet-styles {
+        display: block;
+        border: 1px solid var.$text-color-base;
+        padding: math.div(var.$gutter-base, 6);
+        margin-right: var.$gutter-base;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+    .footer {
+      p {
+        font-weight: var.$font-weight-normal;
+        &:first-of-type {
+          margin-bottom: 0;
+        }
+        font-size: 0.8rem;
+        a {
+          text-decoration: none;
+          color: var.$text-color-base;
+          font-weight: var.$font-weight-bold;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+      @include mix.tablet-styles {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .column-1 {
+    padding-left: var.$gutter-base;
+  }
+}
